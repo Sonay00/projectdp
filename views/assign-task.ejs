@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assign Task</title>
+</head>
+<body>
+    <h1>Assign a New Task</h1>
+    <form method="POST" action="/assign-task">
+        <label for="title">Task Title:</label>
+        <input type="text" id="title" name="title" required>
+        
+        <label for="description">Task Description:</label>
+        <textarea id="description" name="description" required></textarea>
+        
+        <label for="deadline">Deadline:</label>
+        <input type="date" id="deadline" name="deadline" required>
+        
+        <label for="assigned_to">Assign To:</label>
+        <select id="assigned_to" name="assigned_to">
+            <!-- Example placeholder options -->
+            <option value="1">Worker 1</option>
+            <option value="2">Worker 2</option>
+        </select>
+        
+        <button type="submit">Assign Task</button>
+    </form>
+</body>
+</html>

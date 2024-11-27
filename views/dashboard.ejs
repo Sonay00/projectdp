@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="/css/style.css">
+
+</head>
+<h2>Welcome, <%= user.username %></h2>
+<% if (isAdmin) { %>
+    <a href="/assign-task">Assign a New Task</a>
+<% } %>
+<!-- Admin form for assigning tasks -->
+<% if (user.role === 'admin') { %>
+    <h3>Assign Tasks</h3>
+    <form action="/assign-task" method="POST">
+        <input type="text" name="title" placeholder="Task Title" required>
+        <textarea name="description" placeholder="Task Description"></textarea>
+        <input type="date" name="deadline" required>
+        <select name="assigned_to">
+            <% workers.forEach(worker => { %>
+                <option value="<%= worker.id %>"><%= worker.username %></option>
+            <% }) %>
+        </select>
+        <button type="submit">Assign Task</button>
+    </form>
+<% } %>
+<!-- Task list -->
+<h3>Tasks</h3>
+<ul>
+    <% tasks.forEach(task => { %>
+        <li>
+            <strong><%= task.title %></strong> - Due: <%= task.deadline %> - Status: <%= task.status %>
+            <% if (user.role === 'worker' && task.status === 'pending') { %>
+                <form action="/complete-task" method="POST">
+                    <input type="hidden" name="task_id" value="<%= task.id %>">
+                    <button type="submit">Mark as Completed</button>
+                </form>
+            <% } else if (user.role === 'admin' && task.status === 'completed') { %>
+                <form action="/give-feedback" method="POST">
+                    <input type="hidden" name="task_id" value="<%= task.id %>">
+                    <textarea name="feedback" placeholder="Feedback"></textarea>
+                    <button type="submit">Submit Feedback</button>
+                </form>
+            <% } %>
+        </li>
+    <% }) %>
+</ul>
