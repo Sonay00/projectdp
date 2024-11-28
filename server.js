@@ -5,8 +5,10 @@ const bcrypt = require('bcryptjs');
 const session = require('express-session');
 
 const server = http.createServer(handler);
-const port = process.env.PORT || 5000;
-server.listen(port);
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
