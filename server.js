@@ -23,8 +23,8 @@ app.set('views', './views');
 
 // PostgreSQL database connection
 const db = new Pool({
-    connectionString: process.env.DATABASE_URL,
-    ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false,
+    connectionString: process.env.DATABASE_URL, // Use Heroku's DATABASE_URL environment variable
+    ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false, // Enable SSL in production
 });
 
 db.connect()
@@ -61,7 +61,7 @@ app.post('/login', (req, res) => {
         })
         .catch((err) => {
             console.error(err);
-            res.send('Database error');
+            res.send('Error occurred during login.');
         });
 });
 
