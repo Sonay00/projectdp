@@ -23,10 +23,11 @@ app.set('views', './views');
 
 // MySQL database connection
 const db = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: 'Universal2021!',
-    database: 'TaskManagement'
+    host: 'cd1goc44htrmfn.cluster-czrs8kj4isg7.us-east-1.rds.amazonaws.com',
+    user: 'u3bubsq4ihdacv',
+    password: 'p4c02f59cd190da97dcdabd0bf5f170948e2cb4125c63b0c06b0214ee96d000b5',
+    database: 'd93iv6o34uvj8t',
+    port: '5432',
 });
 
 db.connect((err) => {
